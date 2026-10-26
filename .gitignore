@@ -1,0 +1,17 @@
+# Compiled programs and object files
+*.exe
+*.out
+*.o
+*.obj
+
+# Build output
+build/
+out/
+
+# Operating-system clutter
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
