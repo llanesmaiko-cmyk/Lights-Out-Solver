@@ -34,6 +34,7 @@ Initial software development and project planning.
 ## Documentation
 
 Engineering requirements, design decisions, and test results will be added as the project develops.
+- Started converting my engineering notebook to pdf format before commiting the project since docx files cannot be read on GitHub.
 
 ## Author
 

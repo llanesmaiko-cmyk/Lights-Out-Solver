@@ -5,13 +5,48 @@
 
 using namespace std;
 
+
+//Complete a XOR operation of row 2 to row 1
+void xorRow(vector<bool> & toggleMatrix, vector<bool> & lOMatrix, int row1, int row2) {
+  int rowSize = sqrt(toggleMatrix.size());
+  int row1Location = (row1 - 1) * rowSize;
+  int row2Location = (row2 - 1) * rowSize;
+
+  //Iterates through two rows of the toggle matrix, XORs row 2 to row 1
+  for (int i = 0; i < rowSize; i++) {
+    toggleMatrix[row1Location + i] = toggleMatrix[row1Location + i] ^ toggleMatrix[row2Location + i];
+  }
+  //XORs the positions in the lights out matrix that correspond to the rows that were XORed
+  lOMatrix[row1 - 1] = lOMatrix[row1] ^ lOMatrix[row2 - 1];
+}
+
+
+//Swap row 1 and row 2
+void swapRow(vector<bool> & toggleMatrix, vector<bool> & lOMatrix, int row1, int row2) {
+  int rowSize = sqrt(toggleMatrix.size());
+  int row1Location = (row1 - 1) * rowSize;
+  int row2Location = (row2 - 1) * rowSize;
+  int temp = 0;
+
+  //Iterates through two rows of the toggle matrix, swaps row 2 to row 1
+  for (int i = 0; i < rowSize; i++) {
+    temp = toggleMatrix[row1Location + i];
+    toggleMatrix[row1Location + i] = toggleMatrix[row2Location + i];
+    toggleMatrix[row2Location + i] = temp;
+  }
+  //Swaps the positions in the lights out matrix that correspond to the rows that were swaped
+  temp = lOMatrix[row1 - 1];
+  lOMatrix[row1 - 1] = lOMatrix[row2 - 1];
+  lOMatrix[row2 - 1] = temp;
+}
+
 //Take in the original Lights Out puzzle and return its toggle matrix
 vector<bool> createToggleMatrix(const vector<bool> & lOMatrix) {
-    vector<bool> toggleMatrix;
+  vector<bool> toggleMatrix;
   int lOSize = lOMatrix.size();
   int rowSize = sqrt(lOSize);
   int i = 0;
-      //Neighbors
+  //Neighbors
   bool uN = true;
   bool dN = true;
   bool lN = true;
@@ -54,20 +89,32 @@ int main() {
   //Lights Out input
     //0=off 1=on
   vector<bool> lOMatrix = {
-    1,1,1,
+    1,0,1,
     1,1,1,
     1,1,1};
 
   int lOSize = lOMatrix.size();
+  int rowSize = sqrt(lOSize);
   vector<bool> toggleMatrix = createToggleMatrix(lOMatrix);
+  swapRow(toggleMatrix, lOMatrix, 2, 4);
 
-  //Prints the toggle matrix
+  //Print the toggle matrix
   cout << endl << "Matrix size: " << toggleMatrix.size() << endl;
   int counter = 0;
   for (int value : toggleMatrix) {
     cout << value << " ";
     counter++;
     if (counter % lOSize == 0) {
+        cout << endl;
+    }
+  }
+  
+  //Print the Lights Out matrix
+  cout << endl << "Matrix size: " << lOMatrix.size() << endl;
+  for (int value : lOMatrix) {
+    cout << value << " ";
+    counter++;
+    if (counter % rowSize == 0) {
         cout << endl;
     }
   }
