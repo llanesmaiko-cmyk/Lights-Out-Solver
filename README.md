@@ -14,7 +14,7 @@ A personal engineering project to design and build a machine that solves a 5 × 
 
 ## Current Status
 
-Initial software development and project planning.
+PCB planning and design.
 
 ## Technologies
 
